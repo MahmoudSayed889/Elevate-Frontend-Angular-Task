@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-between align-items-center gap-2 mb-4">
+    <h2>Create New Post</h2>
+
+    <button class="btn btn-primary" [routerLink]="['/list']" type="button">Back</button>
+</div>
+
+<div>
+    <form [formGroup]="postForm" (submit)="save()">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" formControlName="title" [ngClass]="{
+                'border-danger': F['title'].touched && (F['title'].getError('required') || F['title'].getError('minlength'))
+            }">
+            @if (F['title'].touched && F['title'].errors) {
+                @if (F['title'].getError('required')) {
+                    <p class="text-danger fw-medium">Title is required</p>
+                }
+                @if (F['title'].getError('minlength')) {
+                    <p class="text-danger fw-medium">Min length 3</p>
+                }
+            }
+        </div>
+        <div class="mb-3">
+            <label for="body" class="form-label">Description</label>
+            <textarea name="body" class="form-control" id="body" formControlName="body" [ngClass]="{
+                'border-danger': F['body'].touched && F['body'].getError('required')
+            }"></textarea>
+            @if (F['body'].touched && F['body'].errors) {
+                @if (F['body'].getError('required')) {
+                    <p class="text-danger fw-medium">Description is required</p>
+                }
+            }
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="postForm.invalid">Create</button>
+    </form>
+</div>

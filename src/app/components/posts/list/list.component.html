@@ -1,0 +1,34 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>All Posts</h2>
+
+    <button class="btn btn-primary" [routerLink]="['/create']" type="button">Create New Post</button>
+</div>
+
+<div class="row gy-4">
+    <div class="">
+        <label for="search" class=" mb-1">Search by title</label>
+        <input type="text" class="form-control" [(ngModel)]="searchTrem" (ngModelChange)="search()" placeholder="Search by title">
+    </div>
+    @for (post of posts.slice(0, 50); track $index) {
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header fw-medium">
+                    <a class="text-purple" [routerLink]="['/details', post.id]">{{post.title}}</a>
+                </div>
+                <div class="card-body">
+                    <!-- <h5 class="card-title">Special title treatment</h5> -->
+                    <p class="card-text">{{post.body}}</p>
+                </div>
+                <div class="card-footer text-body-secondary">
+                    <div class=" d-flex align-items-center gap-1">
+                        <i class="bi bi-person-fill"></i>
+                        <span class=" fw-medium">Created by:</span>
+                        <span>{{ getName("users", post.userId)?.name }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    } @empty {
+        <p class="text-center fs-3 mt-4">No data found</p>
+    }
+</div>
