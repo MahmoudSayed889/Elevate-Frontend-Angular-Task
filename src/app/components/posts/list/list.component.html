@@ -10,7 +10,7 @@
         <input type="text" class="form-control" [(ngModel)]="searchTrem" (ngModelChange)="search()" placeholder="Search by title">
     </div>
     @for (post of posts.slice(0, 50); track $index) {
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-6">
             <div class="card">
                 <div class="card-header fw-medium">
                     <a class="text-purple" [routerLink]="['/details', post.id]">{{post.title}}</a>
